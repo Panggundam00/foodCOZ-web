@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Button, Form } from 'react-bootstrap'
+import './Login.css';
 
 export default class Login extends Component {
     render() {
@@ -7,22 +9,24 @@ export default class Login extends Component {
        <div>
          <h1>FoodCOZ</h1>
        </div>
-
-       <label>ID</label>
-
-       <div>
-         <input/>
+      
+       <div height="200">
+         <lebal className="textLebal" >ID</lebal>
        </div>
 
-       <div>
-         <lebal>Password</lebal>
-       </div>
+       <Form.Control type="email" className="inputPlace" />
 
        <div>
-         <input/>
+         <lebal className="textLebal" >PASSWORD</lebal>
        </div>
 
-       <button><a href="/managePage">Submit</a></button>
+       <Form.Control type="email" className="inputPlace" />
+
+        <div>
+        </div>
+          <div height="1000">
+       <Button className="loginButton" variant="success" href="/managePage">LOG IN</Button>
+       </div>
      </div>
         )
     }

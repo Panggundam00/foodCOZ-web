@@ -12,7 +12,7 @@ class ManagePage extends Component {
                 </div>
 
                 <div>
-                    <button><a>Set menu</a></button>
+                    <button>Set menu</button>
                 </div>
             </div>
         )
