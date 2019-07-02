@@ -1,28 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
-import { Button, Dropdown } from 'react-bootstrap';
+import {BrowserRouter as Router, Route } from 'react-router-dom'
+import ManagePage from './ManagePage'
+import Login from './Login'
+import EditTable from './EditTable'
+import MenuPage from './MenuPage';
 
-function App() {
-  return (
-    <div>
-        <header className="App-header">
-          
-          <p>
-          This is managing menu.
-          </p>
-          <input></input>
-          <button type="button">Add Menu</button>
-          
-          
-          
-        </header>
-        <header>
-          <button type="button">Proceed</button>
-          <button type="button">Cancel</button>
-        </header>
-      </div>
-  );
-}
+const App = () => {
+  return(
+    <Router >
+        <div>
+        <Route path="/" exact component={Login}/>
+        <Route path="/managePage" component={ManagePage}/>
+        <Route path="/menuPage" component={MenuPage}/>
+        <Route path="/editTable" component={EditTable}/>
+        </div>
+    </Router>
+        
+  )
+}  
 
 export default App;
