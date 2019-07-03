@@ -1,0 +1,39 @@
+.detail{
+    height: 300px;
+    width: 1000px ;
+    align-self: center;
+    overflow:hidden;
+}
+
+.headText{
+    font-size: 25px ;
+    margin-top: 10px ;
+    margin-bottom: 10px ;
+}
+
+.foodAdjust{
+    margin-right: 500px;
+}
+
+.quantityAdjust{
+    margin-right: 100px ;
+    margin-left: 500px ;
+}
+
+.priceAdjust{
+    margin-left: 100px ;
+}
+
+p{
+    margin-left: 500px ;
+    font-size: 25px ;
+}
+
+.tableNumber{
+    font-size: 50px ;
+    margin-left: 1000px ;
+}
+
+.payButton{
+    font-size: 25px ;
+}
