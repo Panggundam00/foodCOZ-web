@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 
-export default class TodoItems extends Component {
+export default class TodoItems2 extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          val: 0,
+        };
+    }
+
+    addnumber = (val) => {
+        this.setState({val: 1});
+    }
+
     render() {
         return (
             <h3 className={(this.props.val.isDone ? "done" : "")} key={this.props.index}>
@@ -13,9 +25,9 @@ export default class TodoItems extends Component {
 
                 {/* แก้ Quan เป็นตัวเลข */}
                 <span onClick={() => this.props.handleQuan}>
-                    {value}
+                    {this.state.val}
                 </span>
-                <button style={{ margin: 24 }} onClick={() => this.props.addList(this.props.index)}>
+                <button style={{ margin: 24 }} onClick={() => this.addnumber}>
                 +
                 </button>
             </h3>

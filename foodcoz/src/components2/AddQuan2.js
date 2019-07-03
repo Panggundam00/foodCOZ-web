@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class InputTodo extends Component {
+export default class AddQuan2 extends Component {
     render() {
         return (
             <h3 className={(this.props.val.isDone ? "done" : "")} key={this.props.index}>

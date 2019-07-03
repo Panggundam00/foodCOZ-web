@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class InputTodo extends Component {
+export default class InputTodo2 extends Component {
     render() {
         return (
             <div>
