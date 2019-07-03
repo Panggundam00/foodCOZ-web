@@ -5,7 +5,6 @@ export default class MenuItems extends Component {
 
         return (
             <h3 key={this.props.index}>
-                {this.props.kkk}
 
                 <span className="justify">
                     {this.props.val.menu.detail}

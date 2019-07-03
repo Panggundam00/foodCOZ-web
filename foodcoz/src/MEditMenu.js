@@ -3,7 +3,7 @@ import './MEditMenu.css';
 import Title from "./components/Title";
 import InputMenu from "./components/InputMenu";
 import MenuItems from "./components/MenuItems";
-import AccessFB from "./components/AccessFB";
+// import AccessFB from "./components/AccessFB";
 import { db } from "./firebase"
 
 class App extends React.Component {
@@ -20,39 +20,28 @@ class App extends React.Component {
   
 
 
-    async getMarker() {
-    var mENU;
-    var pRICE;
+    async getMarker(){
+      const documents = [];
     db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data().price_fb);
 
-          this.setState({menuInput: doc.data().menu_fb})
-          this.setState({priceInput:doc.data().price_fb})
+          //  this.props.index.setState({menuInput: doc.data().menu_fb})
+          //  this.setState({priceInput:doc.data().price_fb})
 
 
-          mENU = { detail: this.state.menuInput, isDone: false };
-          pRICE = { detail: this.state.priceInput, isDone: false };
+           let mENU = { detail: doc.data().menu_fb, isDone: false };
+           let pRICE = { detail: doc.data().price_fb, isDone: false };
 
-          this.setState({
-            listMenu: [
-              ...this.state.listMenu,
-              { mENU , pRICE }
-            ],
-            menuInput: "",
-        priceInput: ""
-      
-          });
-
-
+           const document = {menu: mENU , pRICE};
+            documents.push(document);
 
       });
   });
-    return 0;};
-    
-
-
+  return documents;
+};
+      
 
   addMenuList = () => {
     if (this.state.menuInput !== "" && this.state.priceInput !== "") {
@@ -99,10 +88,7 @@ class App extends React.Component {
 
   deleteList = index => {
 
-    
-
-
-    
+  
     let tempDelMenu = this.state.listMenu;
 
     // let menu_fbn = tempDelMenu;
@@ -139,7 +125,10 @@ class App extends React.Component {
   render() {
     // for(var i = 0 ; i < db.collection('Users').doc('User1').collection('Restaurant').lenght ; i++){
     return (
+      
       <div className="App">
+        <script ref={this.getMarker}
+        />
         <button className="logout">Logout</button>
         <Title title="Edit Food Menu" />
         {/* <AccessFB
@@ -151,7 +140,8 @@ class App extends React.Component {
           onChangeMenu={this.handleMenuOnchange}
           onChangePrice={this.handlePriceOnchange}
           onClick={this.addMenuList}
-          kkk = {this.state.getMarker}
+          kkk = {this.getMarker}
+          new1 = {this.addMenuListfb}
           
         />
 
