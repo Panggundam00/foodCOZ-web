@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      vat: 0 ,
       menuInput: "",
       priceInput: "",
       listMenu: []
@@ -75,7 +76,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <button className="logout">Logout</button>
-        <Title title="Menu" />
+        <Title title="Edit Food Menu" />
         <InputMenu
           valueMenu={this.state.menuInput}
           valuePrice={this.state.priceInput}
@@ -83,6 +84,15 @@ class App extends React.Component {
           onChangePrice={this.handlePriceOnchange}
           onClick={this.addMenuList}
         />
+
+        <div>
+          <label>
+            Insert Vat
+          </label>
+        </div>
+
+        <input />
+        <div className="IframeByCSS">
         {this.state.listMenu.map((valMenu, index) => (
           <MenuItems
             key={index}
@@ -91,6 +101,7 @@ class App extends React.Component {
             deleteList={this.deleteList}
           />
         ))}
+        </div>
         <button className="cancel">Cancel</button>
         <button>Save</button>
       </div>
