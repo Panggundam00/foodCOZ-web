@@ -86,11 +86,10 @@ class App extends React.Component {
         />
 
         <div>
-          <label>
+          <label className="font-size40">
             Insert Vat
           </label>
         </div>
-
         <input />
         <div className="IframeByCSS">
         {this.state.listMenu.map((valMenu, index) => (
@@ -102,8 +101,8 @@ class App extends React.Component {
           />
         ))}
         </div>
-        <button className="cancel">Cancel</button>
-        <button>Save</button>
+        <button className="is-danger-button">Cancel</button>
+        <button >Save</button>
       </div>
     );
   }

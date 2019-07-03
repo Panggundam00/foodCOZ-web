@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'gill sans';
 }
 
 .App-logo {
@@ -36,6 +37,14 @@
   margin-right: 250px;
 }
 
+.space {
+  margin-right: 10px;
+}
+
+.font-size40 {
+  font-size: 40px;
+}
+
 .done {
   text-decoration: line-through;
   text-decoration-color: red;
@@ -48,9 +57,46 @@
 .IframeByCSS {
   margin: auto;
   border: 10px black;
-  height: 300px;
+  height: 500px;
   width: 1300px;
   align-self: center;
   overflow: hidden;
   overflow-y: scroll;
+  border-style: solid;
+  background-color: white;
+}
+
+.justify {
+  margin-right: 190px ;
+}
+.deleteButton {
+  background-color: darkred;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.acceptButton {
+  background-color:green;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.is-danger-button {
+  border-color:#ff3860;
+  background-color:#ff3860;
+  border-color:transparent;
+  box-shadow:none;
 }
