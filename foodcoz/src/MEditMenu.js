@@ -3,6 +3,7 @@ import './MEditMenu.css';
 import Title from "./components/Title";
 import InputMenu from "./components/InputMenu";
 import MenuItems from "./components/MenuItems";
+import AccessFB from "./components/AccessFB";
 import { db } from "./firebase"
 
 class App extends React.Component {
@@ -17,6 +18,40 @@ class App extends React.Component {
     };
   }
   
+
+
+    async getMarker() {
+    var mENU;
+    var pRICE;
+    db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data().price_fb);
+
+          this.setState({menuInput: doc.data().menu_fb})
+          this.setState({priceInput:doc.data().price_fb})
+
+
+          mENU = { detail: this.state.menuInput, isDone: false };
+          pRICE = { detail: this.state.priceInput, isDone: false };
+
+          this.setState({
+            listMenu: [
+              ...this.state.listMenu,
+              { mENU , pRICE }
+            ],
+            menuInput: "",
+        priceInput: ""
+      
+          });
+
+
+
+      });
+  });
+    return 0;};
+    
+
 
 
   addMenuList = () => {
@@ -35,9 +70,6 @@ class App extends React.Component {
       // เซ็ทเข้าเมนูไฟเบส แก้ User1ด้วย
       let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
 
-      for(var i = 0 ; i < 10 ; i++){
-        
-      }
 
 
       this.setState({
@@ -66,7 +98,17 @@ class App extends React.Component {
   };
 
   deleteList = index => {
+
+    
+
+
+    
     let tempDelMenu = this.state.listMenu;
+
+    // let menu_fbn = tempDelMenu;
+
+    // db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).delete();
+
     tempDelMenu.splice(index, 1);
     console.log(tempDelMenu);
     this.setState({ listMenu: tempDelMenu });
@@ -95,16 +137,22 @@ class App extends React.Component {
 
 
   render() {
+    // for(var i = 0 ; i < db.collection('Users').doc('User1').collection('Restaurant').lenght ; i++){
     return (
       <div className="App">
         <button className="logout">Logout</button>
         <Title title="Edit Food Menu" />
+        {/* <AccessFB
+        kkk = {this.getMarker}
+        /> */}
         <InputMenu
           valueMenu={this.state.menuInput}
           valuePrice={this.state.priceInput}
           onChangeMenu={this.handleMenuOnchange}
           onChangePrice={this.handlePriceOnchange}
           onClick={this.addMenuList}
+          kkk = {this.state.getMarker}
+          
         />
 
         <div>
@@ -120,6 +168,7 @@ class App extends React.Component {
             val={valMenu}
             index={index}
             deleteList={this.deleteList}
+            kkk = {this.getMarker}
           />
         ))}
         </div>
@@ -127,7 +176,8 @@ class App extends React.Component {
         <button >Save</button>
       </div>
     );
-  }
+  // }
+}
 }
 
 export default App;

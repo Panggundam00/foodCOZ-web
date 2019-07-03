@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 
 export default class MenuItems extends Component {
     render() {
+
         return (
             <h3 key={this.props.index}>
+                {this.props.kkk}
+
                 <span className="justify">
                     {this.props.val.menu.detail}
                 </span>
