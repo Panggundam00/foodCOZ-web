@@ -25,7 +25,7 @@ export default class Login extends Component {
         <div>
         </div>
           <div height="1000">
-       <Button className="loginButton" variant="success" href="/meditMenu">LOG IN</Button>
+       <Button className="loginButton" variant="success" href="/orderPage">LOG IN</Button>
        </div>
        
      </div>

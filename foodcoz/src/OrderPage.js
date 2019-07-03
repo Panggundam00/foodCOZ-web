@@ -18,7 +18,7 @@ class OrderPage extends Component {
                 </div>
 
                 <div>
-                    <iframe className="detail"></iframe>
+                    <iframe className="detail" src="totalbill.html"></iframe>
                 </div>
 
                 <div>
