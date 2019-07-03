@@ -32,10 +32,12 @@ class App extends React.Component {
         price_fb: this.state.priceInput
       };
       
-      // เซ็ทเข้าเมนูไฟเบส
+      // เซ็ทเข้าเมนูไฟเบส แก้ User1ด้วย
       let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
 
-
+      for(var i = 0 ; i < 10 ; i++){
+        
+      }
 
 
       this.setState({
@@ -59,7 +61,8 @@ class App extends React.Component {
   };
 
   handlePriceOnchange = event => {
-    this.setState({ priceInput: event.target.value });
+    //  parseFloat(event.target.value) เพื่อเปลี่ยนจากสตริงเป็นFloat
+    this.setState({ priceInput: parseFloat(event.target.value) });
   };
 
   deleteList = index => {
@@ -105,8 +108,8 @@ class App extends React.Component {
         />
 
         <div>
-          <label className="font-size40">
-            Insert Vat
+          <label>
+            Insert Service Charge
           </label>
         </div>
         <input />

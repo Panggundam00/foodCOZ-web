@@ -7,6 +7,7 @@ export default class MenuItems extends Component {
                 <span className="justify">
                     {this.props.val.menu.detail}
                 </span>
+
                 <span>
                     {this.props.val.price.detail +".-"}
                 </span>
