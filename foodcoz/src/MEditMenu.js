@@ -49,7 +49,7 @@ class App extends React.Component {
     this.setState({ listMenu: tempDelMenu });
 
     let tempDelPrice = this.state.listPrice;
-    tempDelPrice.splice(index, 1);
+    // tempDelPrice.splice(index, 1);
     console.log(tempDelPrice);
     this.setState({ listPrice: tempDelPrice });
   };
