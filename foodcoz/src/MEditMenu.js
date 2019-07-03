@@ -60,10 +60,11 @@ class App extends React.Component {
       let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
 
 
+      // เห็นปะคือตรงนี้มันนี่เว้ยเวลาเรา index มามันจะอยู่ข้างกัลพวกเมนูกับราคาเลยไปดูDelete
 
       this.setState({
         listMenu: [
-          ...this.state.listMenu,
+        ...this.state.listMenu,
           { menu , price }
         ],
 
@@ -73,7 +74,6 @@ class App extends React.Component {
         priceInput: ""
       });
       console.log(this.state.listMenu);
-      console.log(this.state.listPrice);
     }
   };
 
@@ -88,10 +88,14 @@ class App extends React.Component {
 
   deleteList = index => {
 
-  
+    // คือมันรับอินเด็กส์มาที่ตัวมันเองแต่กุไม่รู้ว่าจะไปหาตัวที่อยู่ข้างๆยังไงเก็ทปะเหมือนแบบมันต้องเฉียงไปอันถัดไปอะ
+    // มึงอย่าเพิ่งแก้โค้ดมึงลอง Submit ไปสองค่า แล้ว กดลบค่าบนสุด แล้วลองรีเฟรชหน้าดูตรงคอนโซล
+    // doc ของตัวต่อไปหายทั้งๆที่จริงๆตัวมันเองอะควรหายเก็ทปะ
     let tempDelMenu = this.state.listMenu;
 
-    // let menu_fbn = tempDelMenu;
+
+    // กูจะปลดไว้ก่อนพวกมึงมาเปลี่ยนเป็นโค้ดแล้วลองทำตามที่กูบอกข้างบนนะ
+    // let menu_fbn = tempDelMenu[1].menu.detail;
 
     // db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).delete();
 
