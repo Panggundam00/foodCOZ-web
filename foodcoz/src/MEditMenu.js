@@ -3,6 +3,7 @@ import './MEditMenu.css';
 import Title from "./components/Title";
 import InputMenu from "./components/InputMenu";
 import MenuItems from "./components/MenuItems";
+import { db } from "./firebase"
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class App extends React.Component {
       listMenu: []
     };
   }
+  
+
 
   addMenuList = () => {
     if (this.state.menuInput !== "" && this.state.priceInput !== "") {
@@ -22,11 +25,27 @@ class App extends React.Component {
       let menu = { detail: this.state.menuInput, isDone: false }
       let price = { detail: this.state.priceInput, isDone: false }
 
+      let menu_fbn = this.state.menuInput;
+
+      let data = {
+        menu_fb: this.state.menuInput,
+        price_fb: this.state.priceInput
+      };
+      
+      // เซ็ทเข้าเมนูไฟเบส
+      let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
+
+
+
+
       this.setState({
         listMenu: [
           ...this.state.listMenu,
           { menu , price }
         ],
+
+
+        
         menuInput: "",
         priceInput: ""
       });
