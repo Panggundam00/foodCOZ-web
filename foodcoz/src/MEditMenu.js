@@ -10,19 +10,27 @@ class App extends React.Component {
 
     this.state = {
       menuInput: "",
-      list: []
+      priceInput: "",
+      listMenu: []
     };
   }
 
   addMenuList = () => {
-    if (this.state.menuInput !== "") {
+    if (this.state.menuInput !== "" && this.state.priceInput !== "") {
+
+      let menu = { detail: this.state.menuInput, isDone: false }
+      let price = { detail: this.state.priceInput, isDone: false }
+
       this.setState({
-        list: [
-          ...this.state.list,
-          { detail: this.state.menuInput, isDone: false }
+        listMenu: [
+          ...this.state.listMenu,
+          { menu , price }
         ],
-        menuInput: ""
+        menuInput: "",
+        priceInput: ""
       });
+      console.log(this.state.listMenu);
+      console.log(this.state.listPrice);
     }
   };
 
@@ -30,37 +38,56 @@ class App extends React.Component {
     this.setState({ menuInput: event.target.value });
   };
 
+  handlePriceOnchange = event => {
+    this.setState({ priceInput: event.target.value });
+  };
+
   deleteList = index => {
-    let tempDel = this.state.list;
-    tempDel.splice(index, 1);
-    console.log(tempDel);
-    this.setState({ list: tempDel });
+    let tempDelMenu = this.state.listMenu;
+    tempDelMenu.splice(index, 1);
+    console.log(tempDelMenu);
+    this.setState({ listMenu: tempDelMenu });
+
+    let tempDelPrice = this.state.listPrice;
+    tempDelPrice.splice(index, 1);
+    console.log(tempDelPrice);
+    this.setState({ listPrice: tempDelPrice });
   };
 
   handleMenuDone = index => {
-    let tempDo = this.state.list;
-    console.log(tempDo);
-    tempDo[index].isDone = !tempDo[index].isDone;
-    this.setState({ list: tempDo });
+    let tempDoMenu = this.state.listMenu;
+    console.log(tempDoMenu);
+    tempDoMenu[index].isDone = !tempDoMenu[index].isDone;
+    this.setState({ listMenu: tempDoMenu });
+
+    
   };
+
+  handlePrice = index => {
+    let tempDoPrice = this.state.listPrice;
+    console.log(tempDoPrice);
+    tempDoPrice[index].isDone = !tempDoPrice[index].isDone;
+    this.setState({ listPrice: tempDoPrice });
+  }
 
 
   render() {
     return (
       <div className="App">
         <button className="logout">Logout</button>
-        <Title title="Menu with Component" />
+        <Title title="Menu" />
         <InputMenu
-          value={this.state.menuInput}
-          onChange={this.handleMenuOnchange}
+          valueMenu={this.state.menuInput}
+          valuePrice={this.state.priceInput}
+          onChangeMenu={this.handleMenuOnchange}
+          onChangePrice={this.handlePriceOnchange}
           onClick={this.addMenuList}
         />
-        {this.state.list.map((val, index) => (
+        {this.state.listMenu.map((valMenu, index) => (
           <MenuItems
             key={index}
-            val={val}
+            val={valMenu}
             index={index}
-            handleMenuDone={this.handleMenuDone}
             deleteList={this.deleteList}
           />
         ))}

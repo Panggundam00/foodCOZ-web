@@ -4,8 +4,9 @@ export default class InputMenu extends Component {
     render() {
         return (
             <div>
-                <input type="text" value={this.props.value} onChange={this.props.onChange} />
-                <button onClick={this.props.onClick}>Add</button>
+                <input type="text" value={this.props.menuInput} onChange={this.props.onChangeMenu} />
+                <input type="text" value={this.props.priceInput} onChange={this.props.onChangePrice} />
+                <button onClick={this.props.onClick}>Submit</button>
             </div>
         )
     }

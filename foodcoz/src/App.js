@@ -5,6 +5,7 @@ import OrderPage from './OrderPage'
 import Login from './Login'
 import EditTable from './EditTable'
 import MenuPage from './MenuPage';
+import MEditMenu from './MEditMenu'
 // import totalbill from './totalbill.html'
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/orderPage" component={OrderPage}/>
         <Route path="/menuPage" component={MenuPage}/>
         <Route path="/editTable" component={EditTable}/>
+        <Route path="/meditMenu" component={MEditMenu}/>
         {/* <Route path="/totalbill" component={totalbill}/> */}
         </div>
     </Router>
