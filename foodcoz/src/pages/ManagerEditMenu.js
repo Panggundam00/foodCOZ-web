@@ -127,7 +127,7 @@ class App extends React.Component {
 
 
     // กูจะปลดไว้ก่อนพวกมึงมาเปลี่ยนเป็นโค้ดแล้วลองทำตามที่กูบอกข้างบนนะ
-    let menu_fbn = tempDelMenu[1].menu.detail;
+    // let menu_fbn = tempDelMenu[1].menu.detail;
 
     db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
 

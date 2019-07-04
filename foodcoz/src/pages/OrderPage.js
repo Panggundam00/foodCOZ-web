@@ -4,6 +4,8 @@ import './../App.css'
 import Title from '../components/Title2'
 import { Table, Button, Badge } from 'react-bootstrap'
 import TableOrder from '../components/TableOrder'
+import { db } from "../firebase"
+import Counter from './../components/Counter'
 // import AddQuan from "./components/AddQuan";
 // test add quan by number
 
@@ -12,12 +14,66 @@ class MenuEditPage extends React.Component {
     super(props)
 
     this.state = {
-      list: [
-        {
-          menu_name: '',
-          menu_quan: 1
-        }
-      ]
+      value: 0,
+      quan_fb: 0 ,
+      listMenu: []
+    }
+  }
+
+  componentWillMount(){
+
+    db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
+
+      let listMenu = []
+
+      querySnapshot.forEach((doc)=>{
+
+        let data = {
+          name: db.collection('Users').doc('User1').collection('Restaurant').doc('name_fb'),
+          price: db.collection('Users').doc('User1').collection('Restaurant').doc('price_fb'),
+          quantity: 0 
+        };
+        
+        let setDoc = db.collection('temp').doc('table').collection('menu').doc('menu').set(data);
+
+        listMenu = [ ...listMenu , doc.data() ]
+
+      })
+      this.setState({listMenu})
+    })
+
+  }
+
+  async getMarker(){
+    const documents = [];
+  db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
+
+    let listMenu = []
+
+    querySnapshot.forEach(function(doc) {
+        
+        console.log(doc.id, " => ", doc.data().price_fb);
+        
+        listMenu = [ ...listMenu , doc.data() ]
+
+         let mENU = { detail: doc.data().menu_fb, isDone: false };
+         let pRICE = { detail: doc.data().price_fb, isDone: false };
+
+         const document = {menu: mENU , pRICE};
+          documents.push(document);
+
+    });
+    
+});
+return documents;
+};
+
+  addData = () => {
+
+    db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
+
+    let data = {
+
     }
   }
 
@@ -38,12 +94,14 @@ class MenuEditPage extends React.Component {
     this.setState({ menu_name: event.target.value })
   }
 
-  addQuan = index => {
-    this.setState({ menu_quan: +1 })
+  plusQuan = (quan) => {
+    this.setState({ quan_fb: this.state.quan_fb+1 })
   }
 
-  deleteQuan = index => {
-    this.setState({ menu_quan: -1 })
+  delQuan = (quan) => {
+    if (this.state.quan_fb > 0){
+      this.setState({ quan_fb: this.state.quan_fb-1 })
+    }
   }
 
   deleteList = index => {
@@ -69,17 +127,47 @@ class MenuEditPage extends React.Component {
   // };
 
   render () {
+    console.log(this.state.quan_fb);
+    console.log(this.state.listMenu);
+    
+    
     return (
+       
       <div className='App'>
         <Title title='Table No.#' />
 
+        
+        <Table striped bordered hover variant='dark'>
+        <thead>
+              <tr>
+                <th>Price</th>
+                <th>Food</th>
+                <th>Add / Delete</th>
+              </tr>
+            </thead>
+        </Table>
+
         <div className='IframeByCSS'>
-          <TableOrder />
+
+        {this.state.listMenu.map((valMenu, index) => (
+          <TableOrder 
+            key={index}
+            val={valMenu}
+            index={index}
+            deleteList={this.deleteList}
+            kkk = {this.getMarker}
+            plusQuan={this.plusQuan}
+            delQuan={this.delQuan}
+
+          />
+        ))}
+          
         </div>
 
         <Title title='Menu' />
 
-        <div className='IframeByCSS'>
+
+        <div className='IframeByCSS'>   
           <Table striped bordered hover variant='dark'>
             <thead>
               <tr>
@@ -97,15 +185,6 @@ class MenuEditPage extends React.Component {
               </tbody>
             </Table>
         </div>
-        {/* {this.state.list.map((val, index) => (
-          <AddQuan
-            key={index}
-            val={val}
-            index={index}
-            handleTodoDone={this.handleTodoDone}
-            addList={this.addList}
-          />
-        ))} */}
         <div>
           <Badge variant="secondary">Total #</Badge>
         </div>

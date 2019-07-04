@@ -9,63 +9,17 @@ class TableOrder extends Component {
     return (
         <div className="def-number-input number-input">
           <Table striped bordered hover variant='dark'>
-            <thead>
-              <tr>
-                <th>Price</th>
-                <th>Food</th>
-                <th>Add / Delete</th>
-              </tr>
-            </thead>
             <tbody>
               <tr>
-                <td>123</td>
-                <td>Kapraw1</td>
+                <td>{this.props.val.price_fb}</td>
+                <td>{this.props.val.menu_fb}</td>
                 <td>
-                    <InputPage />
+                    <InputPage
+                      plusQuan={this.props.plusQuan}
+                      delQuan={this.props.delQuan}
+                    />
                 </td>
-              </tr>
-              <tr>
-                <td>123</td>
-                <td>Kapraw2</td>
-                <td>
-                  <InputPage />
-                </td>
-              </tr>
-              <tr>
-                <td>123</td>
-                <td>Kapraw3</td>
-                <td>
-                  <InputPage />
-                </td>
-              </tr>
-              <tr>
-                <td>123</td>
-                <td>Kapraw4</td>
-                <td>
-                  <InputPage />
-                </td>
-              </tr>
-              <tr>
-                <td>123</td>
-                <td>Kapraw5</td>
-                <td>
-                  <InputPage />
-                </td>
-              </tr>
-              <tr>
-                <td>123</td>
-                <td>Kapraw6</td>
-                <td>
-                  <InputPage />
-                </td>
-              </tr>
-              <tr>
-                <td>123</td>
-                <td>Kapraw7</td>
-                <td>
-                  <InputPage />
-                </td>
-              </tr>
+                </tr>
             </tbody>
           </Table>
         </div>
