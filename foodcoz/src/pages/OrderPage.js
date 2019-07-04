@@ -69,11 +69,8 @@ return documents;
 };
 
   addData = () => {
-
-    db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
-
     let data = {
-
+      
     }
   }
 
