@@ -77,17 +77,24 @@ export default class Login extends Component {
 
   lOGIN = async () => {
     let querySnapshot = await db.collection('Users').where("Username", "==", this.state.inputemail).get()
-    
-    if (querySnapshot) {
+    console.log(querySnapshot.empty)
+    if (!querySnapshot.empty) {
       console.log(querySnapshot.docs[0].data())
       // let usn = db.collection('Users').doc(this.state.inputemail).Username;
       // let pw = db.collection('Users').doc(this.state.inputemail).Password;
       let username = querySnapshot.docs[0].data().Username
       let password = querySnapshot.docs[0].data().Password
+      console.log(querySnapshot.docs[0].data().SVC);
       if (username == this.state.inputemail && password == this.state.inputpassword) {
         // this.setState({ loginStatus: "/meditMenu" })
+        let setDoc = db.collection('Users').doc(username).collection('Restaurant').doc('test');
+        db.collection('Users').doc(username).collection('Restaurant').doc('test').delete();
+
+
         this.props.history.push({ pathname: '/meditMenu', state: { username: username} })
       }
+    } else {
+      alert('login error')
     }
   }
 

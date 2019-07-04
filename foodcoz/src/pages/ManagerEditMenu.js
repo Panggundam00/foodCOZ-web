@@ -6,6 +6,7 @@ import MenuItems from "../components/MenuItems";
 import { db } from "../firebase";
 import firebase from "../firebase";
 import { Button } from 'react-bootstrap'
+import { async } from 'q';
 
 class App extends React.Component {
 
@@ -14,7 +15,8 @@ class App extends React.Component {
 
     this.state = {
       userName: this.props.location.state.username,
-      vat: 0 ,
+      SVC: 0 ,
+      SVCinput: "",
       menuInput: "",
       priceInput: "",
       listMenu: [],
@@ -22,11 +24,13 @@ class App extends React.Component {
     };
   }
   
-    componentDidMount(){
+    async componentDidMount(){
+      let querySnapshot = await db.collection('Users').doc(this.state.userName).get()
+      await this.setState({SVC: querySnapshot.data().SVC})
       
       db.collection('Users').doc(this.state.userName).collection('Restaurant').get().then((querySnapshot) =>{
 
-      db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
+      // db.collection('Users').doc(this.state.userName).collection('Restaurant').get().then((querySnapshot) =>{
 
         let listRestaurant = []
 
@@ -37,14 +41,80 @@ class App extends React.Component {
         })
 
         this.setState({listRestaurant})
-
       })
 
     }
 
+    cancelFB = async() =>{
+
+      let querySnapshot = await db.collection('Users').doc(this.state.userName).get()
+      await this.setState({SVC: querySnapshot.data().SVC})
+      
+     await this.state.listRestaurant.forEach((res) => {
+        res = [];
+      })
+      
+      db.collection('Users').doc(this.state.userName).collection('Restaurant').get().then((querySnapshot) =>{
+
+      // db.collection('Users').doc(this.state.userName).collection('Restaurant').get().then((querySnapshot) =>{
+
+        let listRestaurant = []
+
+        querySnapshot.forEach((doc)=>{
+
+          listRestaurant = [ ...listRestaurant , doc.data() ]
+
+        })
+
+        this.setState({listRestaurant})
+      })
+
+    }
+
+
+    saveFB = async() => {
+      let querySnapshot = await db.collection('Users').doc(this.state.userName).get()
+      
+
+      let temp = querySnapshot.data();
+      temp.Password = querySnapshot.data().Password;
+      temp.Username = this.state.userName;
+      temp.SVC = this.state.SVC; 
+      console.log(temp);
+      db.collection('Users').doc(this.state.userName).set(temp);
+
+      // let index = 0;
+
+
+      await db.collection('Users').doc(this.state.userName).collection('Restaurant').get().then((querySnapshot) =>{
+
+
+  
+          querySnapshot.forEach((doc)=>{
+  
+            db.collection('Users').doc(this.state.userName).collection('Restaurant').doc(doc.data().menu_fb).delete();
+
+  
+          })
+        })
+
+
+
+
+      this.state.listRestaurant.forEach((res) => {
+        res.quantity = 0;
+        db.collection('Users').doc(this.state.userName).collection('Restaurant').doc(res.menu_fb).set(res);
+      })
+      // for(var i in this.state.listRestaurant){
+      //   let menu_fbn = i.menu_fb;
+        // db.collection('Users').doc(this.state.userName).collection('Restaurant').doc(menu_fbn).set(i);
+      // }
+    
+    }
+
     getMarker(){
       const documents = [];
-      db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
+      db.collection('Users').doc(this.state.userName).collection('Restaurant').get().then(function(querySnapshot) {
 
       let listRestaurant = []
 
@@ -95,7 +165,8 @@ class App extends React.Component {
       };
       
       // เซ็ทเข้าเมนูไฟเบส แก้ Userด้วย
-      let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
+
+      // let setDoc = db.collection('Users').doc(this.state.userName).collection('Restaurant').doc(menu_fbn).set(data);
 
 
       // เห็นปะคือตรงนี้มันนี่เว้ยเวลาเรา index มามันจะอยู่ข้างกับพวกเมนูกับราคาเลยไปดูDelete
@@ -123,6 +194,10 @@ class App extends React.Component {
     this.setState({ priceInput: parseFloat(event.target.value) });
   };
 
+  handleVSCOnchange = event => {
+    this.setState({ SVCinput: event.target.value });
+  };
+
   deleteList = index => {
 
     // คือมันรับอินเด็กส์มาที่ตัวมันเองแต่กุไม่รู้ว่าจะไปหาตัวที่อยู่ข้างๆยังไงเก็ทปะเหมือนแบบมันต้องเฉียงไปอันถัดไปอะ
@@ -134,7 +209,7 @@ class App extends React.Component {
     // กูจะปลดไว้ก่อนพวกมึงมาเปลี่ยนเป็นโค้ดแล้วลองทำตามที่กูบอกข้างบนนะ
     // let menu_fbn = tempDelMenu[1].menu.detail;
 
-    db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
+    // db.collection('Users').doc(this.state.userName).collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
 
     tempDelMenu.splice(index, 1);
     console.log(tempDelMenu);
@@ -162,12 +237,20 @@ class App extends React.Component {
     this.setState({ listPrice: tempDoPrice });
   }
 
+  handleSVC = () =>{
+    let tempSVC = this.state.SVCinput;
+    console.log(tempSVC);
+    this.setState({ SVC: tempSVC });
+  }
+  
+
 
   render() {
-    console.log('props', this.props.location.state.username)
-    console.log(this.state.listRestaurant);
-    console.log(firebase.auth().currentUser1) ;
-    console.log(this.state.listRestaurant[0]);
+    // console.log('props', this.props.location.state.username)
+    // var i = db.collection('Users').doc(this.state.userName).data('SVC');
+    // console.log(i);
+    // console.log(firebase.auth().currentthis.state.userName) ;
+    // console.log(this.state.listRestaurant[0]);
     
     // for(var i = 0 ; i < db.collection('Users').doc('User').collection('Restaurant').lenght ; i++){
     return (
@@ -175,7 +258,7 @@ class App extends React.Component {
       <div className="App">
         {/* <script ref={this.getMarker}
         /> */}
-        <Button variant="danger" className="logout">Logout</Button>
+        <Button variant="danger" href="./" className="logout">Logout</Button>
         <Title title="Edit Food Menu" />
         {/* <AccessFB
         getDocFB = {this.getMarker}
@@ -195,7 +278,15 @@ class App extends React.Component {
             Insert Service Charge
           </label>
         </div>
-        <input />
+        <input onChange={this.handleVSCOnchange}/>
+        <div>
+          <label  className="font-size20">
+            current Service Charge: {this.state.SVC}
+          </label>
+          </div>
+          <div>
+            <button onClick={this.handleSVC}>svc</button>
+          </div>
         <div className="iframeByCSS">
         {this.state.listRestaurant.map((valMenu, index) => (
           <MenuItems
@@ -207,8 +298,8 @@ class App extends React.Component {
           />
         ))}
         </div>
-        <button className="is-danger-button cancel font-size40">Cancel</button>
-        <button className="accept font-size40">Save</button>
+        <button className="is-danger-button cancel font-size40" onClick={this.cancelFB}>Cancel</button>
+        <button className="accept font-size40" onClick={this.saveFB}>Save</button>
       </div>
     );
   // }
