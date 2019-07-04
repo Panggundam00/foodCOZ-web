@@ -5,6 +5,7 @@ import InputMenu from "../components/InputMenu";
 import MenuItems from "../components/MenuItems";
 import { db } from "../firebase";
 import firebase from "../firebase";
+import { Button } from 'react-bootstrap'
 
 class App extends React.Component {
 
@@ -161,14 +162,16 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.listRestaurant);
-    console.log(firebase.auth().currentUser) 
+    console.log(firebase.auth().currentUser) ;
+    console.log(this.state.listRestaurant[0]);
+    
     // for(var i = 0 ; i < db.collection('Users').doc('User1').collection('Restaurant').lenght ; i++){
     return (
       
       <div className="App">
         {/* <script ref={this.getMarker}
         /> */}
-        <button className="logout">Logout</button>
+        <Button variant="danger" className="logout">Logout</Button>
         <Title title="Edit Food Menu" />
         {/* <AccessFB
         kkk = {this.getMarker}
@@ -189,7 +192,7 @@ class App extends React.Component {
           </label>
         </div>
         <input />
-        <div className="IframeByCSS">
+        <div className="iframeByCSS">
         {this.state.listRestaurant.map((valMenu, index) => (
           <MenuItems
             key={index}

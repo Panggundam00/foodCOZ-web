@@ -1,11 +1,13 @@
 import React from 'react'
 import './../App.css'
-// import './../cssFile/OrderPage.css'
+import './../cssFile/OrderPage.css'
 import Title from '../components/Title2'
 import { Table, Button, Badge } from 'react-bootstrap'
 import TableOrder from '../components/TableOrder'
 import { db } from "../firebase"
+import Ordered from "./../components/Ordered"
 import Counter from './../components/Counter'
+import OrderPage from './PayPage';
 // import AddQuan from "./components/AddQuan";
 // test add quan by number
 
@@ -14,9 +16,11 @@ class MenuEditPage extends React.Component {
     super(props)
 
     this.state = {
+      total: 0,
       value: 0,
       quan_fb: 0 ,
-      listMenu: []
+      listMenu: [],
+      listOrder: []
     }
   }
 
@@ -68,10 +72,12 @@ class MenuEditPage extends React.Component {
 return documents;
 };
 
-  addData = () => {
-    let data = {
-      
-    }
+  addData = index => {
+
+    let data = db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listMenu[index].menu_fb).get()
+    
+    db.collection('temp').doc('table').set(data) 
+
   }
 
   addTodoList = () => {
@@ -117,16 +123,30 @@ return documents;
     tempDo[index].isDone = !tempDo[index].isDone
     this.setState({ list: tempDo })
   }
-  // กลับมา Set ด้วยเป็น Quantity
 
-  // addFood = index => {
-  //   if(this.state)
-  // };
+  //ทำงานก่อน หน้าแอพโหลด
+  // async componentWillMount() {   
+  //   let totalPrice = db.collection('temp').doc('table').get()
+  //   // console.log(dataRef.data()) //รับข้อมูลจาก ดาต้าเบส ผ่าน ไอดี
+  //   this.setState({ total: totalPrice }) // ตั้งค่า state จากการรับข้อมูล
+  // }
 
   render () {
-    console.log(this.state.quan_fb);
-    console.log(this.state.listMenu);
+    // let data = db.collection('Users').doc('User1').collection('Restaurant').get()
     
+    // db.collection('temp').doc('table').set(data) 
+
+    // console.log(this.state.quan_fb);
+    // console.log(this.state.listMenu);
+
+    // console.log(db.collection('temp').doc('table').get());
+    // let data = db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listMenu[0]).get()
+    
+    // db.collection('temp').doc('table').set(data) 
+
+    // console.log(db.collection('temp').doc('table').get());
+
+    // console.log(this.state.listMenu;   
     
     return (
        
@@ -163,9 +183,8 @@ return documents;
 
         <Title title='Menu' />
 
-
-        <div className='IframeByCSS'>   
-          <Table striped bordered hover variant='dark'>
+        <div>
+        <Table striped bordered hover variant='dark'>
             <thead>
               <tr>
                 <th>Price</th>
@@ -173,20 +192,28 @@ return documents;
                 <th>Quantity</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>123</td>
-                <td>Kapraw1</td>
-                <td>10</td>
-              </tr>
-              </tbody>
-            </Table>
+        </Table>
+        </div>
+
+        <div className='iframeByCSS'>   
+        {this.state.listOrder.map((valMenu, index) => (
+          <Ordered 
+            key={index}
+            val={valMenu}
+            index={index}
+            kkk = {this.getMarker}
+            plusQuan={this.plusQuan}
+            delQuan={this.delQuan}
+          />
+        ))}
         </div>
         <div>
-          <Badge variant="secondary">Total #</Badge>
+          <Badge variant="secondary" className="total">Total {this.state.total}</Badge>
         </div>
-        <Button variant='success'>Order</Button>
+        
+        <Button className="order" variant='success' >Order</Button>
         <Button variant='danger'>Result</Button>
+        
       </div>
     )
   }
