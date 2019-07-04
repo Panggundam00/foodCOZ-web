@@ -13,6 +13,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      userName: this.props.location.state.username,
       vat: 0 ,
       menuInput: "",
       priceInput: "",
@@ -22,6 +23,8 @@ class App extends React.Component {
   }
   
     componentDidMount(){
+      
+      db.collection('Users').doc(this.state.userName).collection('Restaurant').get().then((querySnapshot) =>{
 
       db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
 
@@ -161,6 +164,7 @@ class App extends React.Component {
 
 
   render() {
+    console.log('props', this.props.location.state.username)
     console.log(this.state.listRestaurant);
     console.log(firebase.auth().currentUser1) ;
     console.log(this.state.listRestaurant[0]);
