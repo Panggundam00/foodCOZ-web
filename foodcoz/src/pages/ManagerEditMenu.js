@@ -39,9 +39,9 @@ class App extends React.Component {
 
     }
 
-    async getMarker(){
+    getMarker(){
       const documents = [];
-    db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
+      db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
 
       let listRestaurant = []
 
@@ -91,7 +91,7 @@ class App extends React.Component {
         price_fb: this.state.priceInput
       };
       
-      // เซ็ทเข้าเมนูไฟเบส แก้ User1ด้วย
+      // เซ็ทเข้าเมนูไฟเบส แก้ Userด้วย
       let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
 
 
@@ -162,10 +162,10 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.listRestaurant);
-    console.log(firebase.auth().currentUser) ;
+    console.log(firebase.auth().currentUser1) ;
     console.log(this.state.listRestaurant[0]);
     
-    // for(var i = 0 ; i < db.collection('Users').doc('User1').collection('Restaurant').lenght ; i++){
+    // for(var i = 0 ; i < db.collection('Users').doc('User').collection('Restaurant').lenght ; i++){
     return (
       
       <div className="App">

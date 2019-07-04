@@ -38,15 +38,15 @@ class MenuEditPage extends React.Component {
   }
 
   addQuan = index => {
-    this.setState({ menu_quan: +1 })
+    this.setState({ menu_quan: this.state.menu_quan+1 })
   }
 
   deleteQuan = index => {
-    this.setState({ menu_quan: -1 })
+    this.setState({ menu_quan: this.state.menu_quan-1 })
   }
 
   deleteList = index => {
-    this.setState({ menu_quan: -1 })
+    this.setState({ menu_quan: this.state.menu_quan-1 })
     // if(this.state.menu_quan <= 0){
     // let tempDel = this.state.list;
     // tempDel.splice(index, 1);

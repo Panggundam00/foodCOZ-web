@@ -22,7 +22,7 @@ class App extends React.Component {
   
     componentDidMount(){
 
-      db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
+      db.collection('Users').doc('User').collection('Restaurant').get().then((querySnapshot) =>{
 
         let listRestaurant = []
 
