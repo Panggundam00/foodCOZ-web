@@ -36,7 +36,7 @@ export default class Login extends Component {
 
 
   render() {
-    firebase.auth().currentUser
+    //firebase.auth().currentUser
     return (
       <div className="App">
         <div>
@@ -52,6 +52,8 @@ export default class Login extends Component {
         <div>
           <lebal className="textLebal" >PASSWORD</lebal>
         </div>
+
+        <Form.Control type="email" className="inputPlace" />
           <div height="1000">
        <Button className="loginButton" variant="success" href="/meditMenu">LOG IN</Button>
        </div>
