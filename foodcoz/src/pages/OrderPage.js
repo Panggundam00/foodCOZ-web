@@ -18,6 +18,7 @@ class MenuEditPage extends React.Component {
     this.state = {
       total: 0,
       value: 0,
+      quan: 0,
       quan_fb: 0 ,
       listMenu: [],
       listOrder: []
@@ -26,7 +27,8 @@ class MenuEditPage extends React.Component {
 
   async componentWillMount(){
 
-    db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
+    db.collection('Users').doc('User1').collection('Restaurant').get()
+    .then((querySnapshot) =>{
 
       let listMenu = []
 
@@ -35,14 +37,15 @@ class MenuEditPage extends React.Component {
         listMenu = [ ...listMenu , doc.data() ]
 
       })
-      this.setState({listMenu})
+      this.setState({listMenu: listMenu})
+      this.setState({listOrder: listMenu})
     })
     console.log(this.state.listMenu);
     
 
     let tempRef = await db.collection('temp').doc('table').get()
 
-    console.log('get from table', tempRef.data().priceTotal);
+    console.log('get from table', tempRef.data().priceTotal); 
 
     console.log(this.state.listMenu);
     
@@ -50,16 +53,16 @@ class MenuEditPage extends React.Component {
   }
 
 
-  componentWillMount(){
-    let listOrder = []
-    db.collection('temp').doc('table').collection('menu').get()
-    .then((querySnapshot) => {
-      console.log(querySnapshot.docs);
-      // let tempData = querySnapshot.data()
-      // console.log(tempData)
-    })
+  // componentWillMount(){
+  //   let listOrder = []
+  //   db.collection('temp').doc('table').collection('menu').get()
+  //   .then((querySnapshot) => {
+  //     console.log(querySnapshot.docs);
+  //     // let tempData = querySnapshot.data()
+  //     // console.log(tempData)
+  //   })
 
-  }
+  // }
 
   addData = index => {
 
@@ -80,6 +83,25 @@ class MenuEditPage extends React.Component {
         menu_name: ''
       })
     }
+  }
+
+  increaseListOrder = index => {
+    
+    
+    let temp = this.state.listOrder
+    console.log(index);
+    
+    console.log(temp[index]);
+    
+    temp[index].quantity = temp[index].quantity + 1
+    this.setState({listOrder: temp})
+  }
+
+  decreaseListOrder = index => {
+    let temp = this.state.listOrder
+    console.log(temp[index]);
+    temp[index].quantity = temp[index].quantity - 1
+    this.setState({listOrder: temp})
   }
 
   handleTodoOnchange = event => {
@@ -114,7 +136,7 @@ class MenuEditPage extends React.Component {
   }
 
   render () {
-    
+
     return (
        
       <div className='App'>
@@ -141,7 +163,8 @@ class MenuEditPage extends React.Component {
             deleteList={this.deleteList}
             plusQuan={this.plusQuan}
             delQuan={this.delQuan}
-
+            decreaseListOrder={this.decreaseListOrder}
+            increaseListOrder={this.increaseListOrder}
           />
         ))}
           
@@ -167,8 +190,7 @@ class MenuEditPage extends React.Component {
             key={index}
             val={valMenu}
             index={index}
-            plusQuan={this.plusQuan}
-            delQuan={this.delQuan}
+            
           />
         ))}
         </div>

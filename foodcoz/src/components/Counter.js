@@ -18,6 +18,7 @@ class InputPage extends Component {
     if (this.state.value > 0){
       this.setState({ value: this.state.value - 1 }, () => {
         this.props.delQuan(this.state.value)
+        this.props.decreaseListOrder(this.props.index)
       });
     }
 
@@ -26,6 +27,7 @@ class InputPage extends Component {
   increase = () => {
     this.setState({ value: this.state.value + 1 } , ()=>{
       this.props.plusQuan(this.props.value)
+      this.props.increaseListOrder(this.props.index)
     });
   }
 
