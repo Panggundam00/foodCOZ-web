@@ -23,7 +23,7 @@ class App extends React.Component {
   
     componentDidMount(){
 
-      db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
+      db.collection('Users').doc('User').collection('Restaurant').get().then((querySnapshot) =>{
 
         let listRestaurant = []
 
@@ -41,7 +41,7 @@ class App extends React.Component {
 
     async getMarker(){
       const documents = [];
-    db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
+    db.collection('Users').doc('User').collection('Restaurant').get().then(function(querySnapshot) {
 
       let listRestaurant = []
 
@@ -91,8 +91,8 @@ class App extends React.Component {
         price_fb: this.state.priceInput
       };
       
-      // เซ็ทเข้าเมนูไฟเบส แก้ User1ด้วย
-      let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
+      // เซ็ทเข้าเมนูไฟเบส แก้ Userด้วย
+      let setDoc = db.collection('Users').doc('User').collection('Restaurant').doc(menu_fbn).set(data);
 
 
       // เห็นปะคือตรงนี้มันนี่เว้ยเวลาเรา index มามันจะอยู่ข้างกับพวกเมนูกับราคาเลยไปดูDelete
@@ -131,7 +131,7 @@ class App extends React.Component {
     // กูจะปลดไว้ก่อนพวกมึงมาเปลี่ยนเป็นโค้ดแล้วลองทำตามที่กูบอกข้างบนนะ
     // let menu_fbn = tempDelMenu[1].menu.detail;
 
-    db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
+    db.collection('Users').doc('User').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
 
     tempDelMenu.splice(index, 1);
     console.log(tempDelMenu);
@@ -165,7 +165,7 @@ class App extends React.Component {
     console.log(firebase.auth().currentUser) ;
     console.log(this.state.listRestaurant[0]);
     
-    // for(var i = 0 ; i < db.collection('Users').doc('User1').collection('Restaurant').lenght ; i++){
+    // for(var i = 0 ; i < db.collection('Users').doc('User').collection('Restaurant').lenght ; i++){
     return (
       
       <div className="App">

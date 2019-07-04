@@ -24,7 +24,7 @@ class MenuEditPage extends React.Component {
     }
   }
 
-  componentWillMount(){
+  async componentWillMount(){
 
     db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
 
@@ -32,45 +32,38 @@ class MenuEditPage extends React.Component {
 
       querySnapshot.forEach((doc)=>{
 
-        let data = {
-          name: db.collection('Users').doc('User1').collection('Restaurant').doc('name_fb'),
-          price: db.collection('Users').doc('User1').collection('Restaurant').doc('price_fb'),
-          quantity: 0 
-        };
-        
-        let setDoc = db.collection('temp').doc('table').collection('menu').doc('menu').set(data);
-
         listMenu = [ ...listMenu , doc.data() ]
 
       })
       this.setState({listMenu})
     })
 
+    let tempRef = await db.collection('temp').doc('table').get()
+
+    console.log('get from table', tempRef.data().priceTotal);
+
+    console.log(this.state.listMenu);
+    
+
   }
 
-  async getMarker(){
-    const documents = [];
-  db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
 
-    let listMenu = []
+  async componentWillMount(){
+    db.collection('temp').doc('table').get().then((querySnapshot) => {
 
-    querySnapshot.forEach(function(doc) {
-        
-        console.log(doc.id, " => ", doc.data().price_fb);
-        
-        listMenu = [ ...listMenu , doc.data() ]
+      let listOrder = []
+      // console.log(doc.data());
+      
+  
+      querySnapshot.forEach((doc)=>{
 
-         let mENU = { detail: doc.data().menu_fb, isDone: false };
-         let pRICE = { detail: doc.data().price_fb, isDone: false };
+        listOrder = [ ...listOrder , doc.data() ]
 
-         const document = {menu: mENU , pRICE};
-          documents.push(document);
+      })
+      
+    })
 
-    });
-    
-});
-return documents;
-};
+  }
 
   addData = index => {
 
@@ -124,29 +117,7 @@ return documents;
     this.setState({ list: tempDo })
   }
 
-  //ทำงานก่อน หน้าแอพโหลด
-  // async componentWillMount() {   
-  //   let totalPrice = db.collection('temp').doc('table').get()
-  //   // console.log(dataRef.data()) //รับข้อมูลจาก ดาต้าเบส ผ่าน ไอดี
-  //   this.setState({ total: totalPrice }) // ตั้งค่า state จากการรับข้อมูล
-  // }
-
   render () {
-    // let data = db.collection('Users').doc('User1').collection('Restaurant').get()
-    
-    // db.collection('temp').doc('table').set(data) 
-
-    // console.log(this.state.quan_fb);
-    // console.log(this.state.listMenu);
-
-    // console.log(db.collection('temp').doc('table').get());
-    // let data = db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listMenu[0]).get()
-    
-    // db.collection('temp').doc('table').set(data) 
-
-    // console.log(db.collection('temp').doc('table').get());
-
-    // console.log(this.state.listMenu;   
     
     return (
        
@@ -172,7 +143,6 @@ return documents;
             val={valMenu}
             index={index}
             deleteList={this.deleteList}
-            kkk = {this.getMarker}
             plusQuan={this.plusQuan}
             delQuan={this.delQuan}
 
