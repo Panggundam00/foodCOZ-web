@@ -6,6 +6,7 @@
     align-self: center;
     overflow:hidden;
     overflow-y: scroll ;
+    border-style: solid;
 }
 
 .headText{
@@ -27,9 +28,39 @@
     margin-left: 100px ;
 }
 
-p{
+.fixed-navFirstname {
+    position: fixed;
+    background-color: black;
+    width: 26.4%
+}
+
+.fixed-navLastname {
+    position: fixed;
+    background-color: black;
+    width: 20.6%
+}
+
+.fixed-navUsername {
+    position: fixed;
+    background-color: black;
+    width: 18.5%
+}
+
+.gillsans{
+    font-family: 'Gill Sans';
+}
+
+.p{
     margin-left: 500px ;
     font-size: 25px ;
+}
+
+.marginleft{
+    margin-left: 526px;
+}
+
+.marginfarleft {
+    margin-left: 908px;
 }
 
 .tableNumber{

@@ -3,14 +3,13 @@ import './../App.css';
 import './../cssFile/PayPage.css'
 import { Button, Badge } from 'react-bootstrap'
 import { Table } from 'react-bootstrap'
-import TableOrder from '../components/TableOrder';
 import PayTable from './../components/PayTable'
 
 class OrderPage extends Component {
     render() {
         return (
             <div className="App">
-                <div className="tableNumber">
+                <div className="tableNumber gillsans">
                     <Badge variant="secondary">TABLE NO.#</Badge>
                 </div>
 
@@ -21,9 +20,7 @@ class OrderPage extends Component {
                 </div>
 
                 <div className="IframeByCSS">
-                    <PayTable
-
-                    />
+                    <PayTable />
                 </div>
 
                 <div>
