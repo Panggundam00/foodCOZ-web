@@ -1,33 +1,24 @@
 import React, { Component } from 'react'
-import './App.css';
-import './OrderPage.css'
-import { Button, Badge } from 'react-bootstrap'
 import { Table } from 'react-bootstrap'
 
-class OrderPage extends Component {
+export default class PayTable extends Component {
     render() {
         return (
-            <div className="App">
-                <div className="tableNumber">
-                    <Badge variant="secondary">TABLE NO.#</Badge>
-                </div>
-
-                <div className="headText">
-                    <span className="textAdjust"><Badge variant="info">Food</Badge></span> 
-                    <span className="quantityAdjust"><Badge variant="info">Quantity</Badge></span> 
-                    <span className="priceAdjust"><Badge variant="info">Price</Badge></span>
-                </div>
-
-                <div className="IframeByCSS">
-                    <Table striped bordered hover variant="dark">
+            <div>
+                <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th className="fixed-navFirstname">First Name</th>
+                            <th className="fixed-navLastname marginleft">Last Name</th>
+                            <th className="fixed-navUsername marginfarleft">Username</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                            <td>.</td>
+                            <td>.</td>
+                            <td>.</td>
+                            </tr>
                             <tr>
                             <td>Mark</td>
                             <td>Otto</td>
@@ -80,20 +71,8 @@ class OrderPage extends Component {
                             </tr>
                         </tbody>
                     </Table>
-                </div>
-
-                <div>
-                    <p>Service charge-------------10%-----20</p>
-                    <p>Vat------------------------7%------25</p>
-                    <p>Total------370</p>
-                </div>
-
-                <div>
-                    <Button variant="danger" className="payButton">PAY</Button>
-                </div>
+                
             </div>
         )
     }
 }
-
-export default OrderPage

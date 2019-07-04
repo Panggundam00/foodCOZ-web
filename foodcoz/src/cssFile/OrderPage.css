@@ -1,0 +1,20 @@
+.IframeByCSS {
+    margin: auto;
+    border: 100px black;
+    height: 300px;
+    width: 1300px;
+    align-self: center;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+
+.total{
+  margin-left: 1000px ;
+  font-size: 30px ;
+}
+
+.oeder{
+  margin-top: 300px ; 
+  margin-right: 1000px ;
+}
