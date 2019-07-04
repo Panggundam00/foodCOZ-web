@@ -238,8 +238,8 @@ class App extends React.Component {
   }
 
   handleSVC = () =>{
-    let tempSVC = this.state.SVCinput;
-    console.log(tempSVC);
+    if(this.state.SVCinput == "" || typeof this.state.SVCinput !== "number"){this.setState({ SVCinput: this.state.SVC });}
+    let tempSVC = parseFloat(this.state.SVCinput);
     this.setState({ SVC: tempSVC });
   }
   
