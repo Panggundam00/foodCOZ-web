@@ -50,12 +50,21 @@ class App extends React.Component {
           
           // list = [ item , ...list ]
 
+
+
           //  this.props.index.setState({menuInput: doc.data().menu_fb})
           //  this.setState({priceInput:doc.data().price_fb})
           listRestaurant = [ ...listRestaurant , doc.data() ]
 
            let mENU = { detail: doc.data().menu_fb, isDone: false };
            let pRICE = { detail: doc.data().price_fb, isDone: false };
+
+          //  this.setState({
+          //   listMenu: [
+          //   ...this.this.state.listMenu,
+          //     { mENU , pRICE }
+          //   ]
+          // });
 
            const document = {menu: mENU , pRICE};
             documents.push(document);
@@ -119,7 +128,7 @@ class App extends React.Component {
 
 
     // กูจะปลดไว้ก่อนพวกมึงมาเปลี่ยนเป็นโค้ดแล้วลองทำตามที่กูบอกข้างบนนะ
-    // let menu_fbn = tempDelMenu[1].menu.detail;
+    let menu_fbn = tempDelMenu[1].menu.detail;
 
     db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
 
@@ -171,7 +180,6 @@ class App extends React.Component {
           onChangePrice={this.handlePriceOnchange}
           onClick={this.addMenuList}
           kkk = {this.getMarker}
-          new1 = {this.addMenuListfb}
           
         />
 
