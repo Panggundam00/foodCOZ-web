@@ -3,7 +3,8 @@ import './../cssFile/ManagerEditMenu.css';
 import Title from "../components/Title";
 import InputMenu from "../components/InputMenu";
 import MenuItems from "../components/MenuItems";
-import { db } from "../firebase"
+import { db } from "../firebase";
+import firebase from "../firebase";
 
 class App extends React.Component {
 
@@ -160,7 +161,7 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.listRestaurant);
-    
+    console.log(firebase.auth().currentUser) 
     // for(var i = 0 ; i < db.collection('Users').doc('User1').collection('Restaurant').lenght ; i++){
     return (
       

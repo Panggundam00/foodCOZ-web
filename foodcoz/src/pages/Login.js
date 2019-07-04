@@ -33,9 +33,34 @@ export default class Login extends Component {
 // });
 
   
-
-
+// ของพลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลลล
+// handleSignUp = async() => {
+//   let querySnapshot = await db.collection('users').where("name", "==", this.state.name).get()
+//   // console.log(querySnapshot.docs[0].id)
+//   if ( querySnapshot.docs.length === 0 ){
+//       let newUserRef = db.collection('users').doc()
+//       newUserRef.set({ name: this.state.name })
+//       .then(() => {
+//           console.log(newUserRef.id)
+//           this.props.navigation.navigate('Money', {name: this.state.name, id: newUserRef.id})                
+//       })
+//   } else {
+//       this.props.navigation.navigate('Record', {name: this.state.name, id: querySnapshot.docs[0].id })
+//   }
+// }
     render() {
+      
+  // firebase.auth().onAuthStateChanged(function(user) {
+  //   window.user = user; // user is undefined if no user signed in
+  //   });
+     
+  //   // Sign in existing user
+  //   firebase.auth().signInWithEmailAndPassword("user@example.com", "userexample")
+  //   .catch(function (err) {
+  //     // Handle errors
+  //   });
+    console.log(firebase.auth().currentUser) 
+
         return (
             <div className="App">
        <div>
@@ -52,14 +77,14 @@ export default class Login extends Component {
          <lebal className="textLebal" >PASSWORD</lebal>
        </div>
 
-       <Form.Control type="email" className="inputPlace" data-init/>
+       <Form.Control type="password" className="inputPlace" data-init/>
 
         <div>
         </div>
           <div height="1000">
        <Button className="loginButton" variant="success" href="/meditMenu">LOG IN</Button>
        </div>
-       
+        
      </div>
         )
     }
