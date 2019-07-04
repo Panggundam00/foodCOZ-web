@@ -23,7 +23,7 @@ class App extends React.Component {
   
     componentDidMount(){
 
-      db.collection('Users').doc('User').collection('Restaurant').get().then((querySnapshot) =>{
+      db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
 
         let listRestaurant = []
 
@@ -131,7 +131,7 @@ class App extends React.Component {
     // กูจะปลดไว้ก่อนพวกมึงมาเปลี่ยนเป็นโค้ดแล้วลองทำตามที่กูบอกข้างบนนะ
     // let menu_fbn = tempDelMenu[1].menu.detail;
 
-    db.collection('Users').doc('User').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
+    db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
 
     tempDelMenu.splice(index, 1);
     console.log(tempDelMenu);
