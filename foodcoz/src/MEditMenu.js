@@ -60,7 +60,7 @@ class App extends React.Component {
       let setDoc = db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).set(data);
 
 
-      // เห็นปะคือตรงนี้มันนี่เว้ยเวลาเรา index มามันจะอยู่ข้างกัลพวกเมนูกับราคาเลยไปดูDelete
+      // เห็นปะคือตรงนี้มันนี่เว้ยเวลาเรา index มามันจะอยู่ข้างกับพวกเมนูกับราคาเลยไปดูDelete
 
       this.setState({
         listMenu: [
@@ -150,7 +150,7 @@ class App extends React.Component {
         />
 
         <div>
-          <label>
+          <label className="font-size20">
             Insert Service Charge
           </label>
         </div>
@@ -167,8 +167,8 @@ class App extends React.Component {
           />
         ))}
         </div>
-        <button className="is-danger-button">Cancel</button>
-        <button >Save</button>
+        <button className="is-danger-button cancel font-size40">Cancel</button>
+        <button className="accept font-size40">Save</button>
       </div>
     );
   // }

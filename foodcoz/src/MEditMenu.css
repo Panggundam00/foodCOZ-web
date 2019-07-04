@@ -35,10 +35,30 @@
 
 .cancel {
   margin-right: 250px;
+  width: 150px;
+  height: 75px;
+  
+}
+
+.accept {
+  background-color: green;
+  width: 150px;
+  height: 75px;
+  border-color: green;
+  border-color:transparent;
+  box-shadow:none;
 }
 
 .space {
   margin-right: 10px;
+}
+
+.font-size20 {
+  font-size: 20px;
+}
+
+.font-size30 {
+  font-size: 30px;
 }
 
 .font-size40 {
