@@ -1,0 +1,9 @@
+.IframeByCSS {
+    margin: auto;
+    border: 10px black;
+    height: 300px;
+    width: 1300px;
+    align-self: center;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
