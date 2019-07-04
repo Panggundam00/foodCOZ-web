@@ -8,12 +8,17 @@ export default class PayTable extends Component {
                 <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th className="fixed-navFirstname">First Name</th>
+                            <th className="fixed-navLastname marginleft">Last Name</th>
+                            <th className="fixed-navUsername marginfarleft">Username</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                            <td>.</td>
+                            <td>.</td>
+                            <td>.</td>
+                            </tr>
                             <tr>
                             <td>Mark</td>
                             <td>Otto</td>
