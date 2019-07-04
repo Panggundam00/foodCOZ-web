@@ -7,6 +7,7 @@ import MenuItems2 from "./components/MenuItems2";
 import { db } from "./firebase"
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -14,22 +15,44 @@ class App extends React.Component {
       vat: 0 ,
       menuInput: "",
       priceInput: "",
-      listMenu: []
+      listMenu: [],
+      listRestaurant: []
     };
   }
   
+    componentDidMount(){
 
+      db.collection('Users').doc('User1').collection('Restaurant').get().then((querySnapshot) =>{
+
+        let listRestaurant = []
+
+        querySnapshot.forEach((doc)=>{
+
+          listRestaurant = [ ...listRestaurant , doc.data() ]
+
+        })
+
+        this.setState({listRestaurant})
+
+      })
+
+    }
 
     async getMarker(){
       const documents = [];
     db.collection('Users').doc('User1').collection('Restaurant').get().then(function(querySnapshot) {
+
+      let listRestaurant = []
+
       querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data().price_fb);
+          
+          // list = [ item , ...list ]
 
           //  this.props.index.setState({menuInput: doc.data().menu_fb})
           //  this.setState({priceInput:doc.data().price_fb})
-
+          listRestaurant = [ ...listRestaurant , doc.data() ]
 
            let mENU = { detail: doc.data().menu_fb, isDone: false };
            let pRICE = { detail: doc.data().price_fb, isDone: false };
@@ -38,7 +61,9 @@ class App extends React.Component {
             documents.push(document);
 
       });
+      // this.setState({listRestaurant: listRestaurant })
   });
+  // this.setState({test:"hello"})
   return documents;
 };
       
@@ -67,13 +92,12 @@ class App extends React.Component {
         ...this.state.listMenu,
           { menu , price }
         ],
-
-
-        
+        listRestaurant:[...this.state.listRestaurant , data],  
         menuInput: "",
         priceInput: ""
+      } , () => {
+        console.log(this.state.listMenu);
       });
-      console.log(this.state.listMenu);
     }
   };
 
@@ -91,13 +115,13 @@ class App extends React.Component {
     // คือมันรับอินเด็กส์มาที่ตัวมันเองแต่กุไม่รู้ว่าจะไปหาตัวที่อยู่ข้างๆยังไงเก็ทปะเหมือนแบบมันต้องเฉียงไปอันถัดไปอะ
     // มึงอย่าเพิ่งแก้โค้ดมึงลอง Submit ไปสองค่า แล้ว กดลบค่าบนสุด แล้วลองรีเฟรชหน้าดูตรงคอนโซล
     // doc ของตัวต่อไปหายทั้งๆที่จริงๆตัวมันเองอะควรหายเก็ทปะ
-    let tempDelMenu = this.state.listMenu;
+    let tempDelMenu = this.state.listRestaurant;
 
 
     // กูจะปลดไว้ก่อนพวกมึงมาเปลี่ยนเป็นโค้ดแล้วลองทำตามที่กูบอกข้างบนนะ
     // let menu_fbn = tempDelMenu[1].menu.detail;
 
-    // db.collection('Users').doc('User1').collection('Restaurant').doc(menu_fbn).delete();
+    db.collection('Users').doc('User1').collection('Restaurant').doc(this.state.listRestaurant[index].menu_fb).delete();
 
     tempDelMenu.splice(index, 1);
     console.log(tempDelMenu);
@@ -127,12 +151,14 @@ class App extends React.Component {
 
 
   render() {
+    console.log(this.state.listRestaurant);
+    
     // for(var i = 0 ; i < db.collection('Users').doc('User1').collection('Restaurant').lenght ; i++){
     return (
       
       <div className="App">
-        <script ref={this.getMarker}
-        />
+        {/* <script ref={this.getMarker}
+        /> */}
         <button className="logout">Logout</button>
         <Title title="Edit Food Menu" />
         {/* <AccessFB
@@ -156,8 +182,7 @@ class App extends React.Component {
         </div>
         <input />
         <div className="IframeByCSS">
-          {/* <MenuItems2 val={10} deleteList={this.deleteList}/> */}
-        {this.state.listMenu.map((valMenu, index) => (
+        {this.state.listRestaurant.map((valMenu, index) => (
           <MenuItems
             key={index}
             val={valMenu}
