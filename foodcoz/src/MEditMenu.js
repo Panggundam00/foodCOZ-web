@@ -3,7 +3,7 @@ import './MEditMenu.css';
 import Title from "./components/Title";
 import InputMenu from "./components/InputMenu";
 import MenuItems from "./components/MenuItems";
-// import AccessFB from "./components/AccessFB";
+import MenuItems2 from "./components/MenuItems2";
 import { db } from "./firebase"
 
 class App extends React.Component {
@@ -156,6 +156,7 @@ class App extends React.Component {
         </div>
         <input />
         <div className="IframeByCSS">
+          {/* <MenuItems2 val={10} deleteList={this.deleteList}/> */}
         {this.state.listMenu.map((valMenu, index) => (
           <MenuItems
             key={index}

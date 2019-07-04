@@ -1,8 +1,40 @@
 import React, { Component } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import './Login.css';
-
+import firebase from './firebase';
 export default class Login extends Component {
+
+//   constructor(props) {
+//     super(props)
+//     this.state = { email: '', password: '' }
+//     this.handleChange = this.handleChange.bind(this)
+//     this.handleSubmit = this.handleSubmit.bind(this)
+//   }
+
+//   handleChange(event) {
+//     this.setState({ email: event.target.value })
+//   }
+
+//   handleSubmit(event) {
+//     alert(this.state.email)
+//     event.preventDefault()
+//   }
+
+//   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+//   // Handle Errors here.
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   if (errorCode === 'auth/wrong-password') {
+//     alert('Wrong password.');
+//   } else {
+//     alert(errorMessage);
+//   }
+//   console.log(error);
+// });
+
+  
+
+
     render() {
         return (
             <div className="App">
@@ -20,7 +52,7 @@ export default class Login extends Component {
          <lebal className="textLebal" >PASSWORD</lebal>
        </div>
 
-       <Form.Control type="email" className="inputPlace" />
+       <Form.Control type="email" className="inputPlace" data-init/>
 
         <div>
         </div>
