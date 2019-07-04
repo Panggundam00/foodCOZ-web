@@ -171,7 +171,7 @@ class App extends React.Component {
         <button className="logout">Logout</button>
         <Title title="Edit Food Menu" />
         {/* <AccessFB
-        kkk = {this.getMarker}
+        getDocFB = {this.getMarker}
         /> */}
         <InputMenu
           valueMenu={this.state.menuInput}
@@ -179,7 +179,7 @@ class App extends React.Component {
           onChangeMenu={this.handleMenuOnchange}
           onChangePrice={this.handlePriceOnchange}
           onClick={this.addMenuList}
-          kkk = {this.getMarker}
+          getDocFB = {this.getMarker}
           
         />
 
@@ -196,7 +196,7 @@ class App extends React.Component {
             val={valMenu}
             index={index}
             deleteList={this.deleteList}
-            kkk = {this.getMarker}
+            getDocFB = {this.getMarker}
           />
         ))}
         </div>
