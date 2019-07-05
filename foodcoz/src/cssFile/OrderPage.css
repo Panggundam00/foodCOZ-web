@@ -1,6 +1,7 @@
 .IframeByCSS {
+  border-style: solid;
     margin: auto;
-    border: 100px black;
+    
     height: 300px;
     width: 1300px;
     align-self: center;
@@ -8,6 +9,13 @@
     overflow-y: scroll;
   }
 
+.fontcolor{
+  color: brown;
+}
+
+  .bordersolid{
+    border-style: solid;
+  }
 
 .total{
   margin-left: 1000px ;

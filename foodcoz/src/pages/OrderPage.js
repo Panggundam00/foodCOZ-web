@@ -171,15 +171,15 @@ class MenuEditPage extends React.Component {
         
         <Table striped bordered hover variant='dark'>
         <thead>
-              <tr>
+              <tr >
                 <th>Price</th>
                 <th>Food</th>
-                <th>Add / Delete</th>
+                <th>Delete / Add</th>
               </tr>
             </thead>
         </Table>
 
-        <div className='IframeByCSS'>
+        <div className='IframeByCSS bordersolid' >
 
         {this.state.listMenu.map((valMenu, index) => (
           <TableOrder 
