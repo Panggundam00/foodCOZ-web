@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import './Login.css';
-import firebase from './firebase';
+// import firebase from './firebase';
 export default class Login extends Component {
 
   //   constructor(props) {

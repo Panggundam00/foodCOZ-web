@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './../App.css';
 import './../cssFile/PayPage.css'
 import { Button, Badge } from 'react-bootstrap'
-import { Table } from 'react-bootstrap'
+// import { Table } from 'react-bootstrap'
 import PayTable from './../components/PayTable'
 
 class OrderPage extends Component {
@@ -20,7 +20,14 @@ class OrderPage extends Component {
                 </div>
 
                 <div className="IframeByCSS">
-                    <PayTable />
+                {this.state.listMenu.map((valMenu, index) => (
+                    <PayTable
+                        key={index}
+                        val={valMenu}
+                        index={index}
+                    />
+                    ))}
+                    
                 </div>
 
                 <div>
