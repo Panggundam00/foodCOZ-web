@@ -6,8 +6,9 @@ import { Table, Button, Badge } from 'react-bootstrap'
 import TableOrder from '../components/TableOrder'
 import { db } from "../firebase"
 import Ordered from "./../components/Ordered"
-import Counter from './../components/Counter'
-import OrderPage from './PayPage';
+// import Counter from './../components/Counter'
+// import OrderPage from './PayPage';
+// import { async } from 'q';
 // import AddQuan from "./components/AddQuan";
 // test add quan by number
 
@@ -25,7 +26,7 @@ class MenuEditPage extends React.Component {
     }
   }
 
-  async componentWillMount(){
+  async componentDidMount(){
 
     db.collection('Users').doc('User1').collection('Restaurant').get()
     .then((querySnapshot) =>{
@@ -135,6 +136,31 @@ class MenuEditPage extends React.Component {
     this.setState({ list: tempDo })
   }
 
+  changeQuantity = async() => {
+    // let tempList = this.state.listOrder
+
+    await db.collection('temp').doc('table').collection('menu').get().then((querySnapshot) =>{
+
+
+  
+      querySnapshot.forEach((doc)=>{
+
+        db.collection('temp').doc('table').collection('menu').doc(doc.data().menu_fb).delete();
+
+
+      })
+    })
+
+    this.state.listMenu.forEach((res)=>{
+      
+      if(res.quantity !== 0){
+        console.log(res.menu_fb);
+        console.log(res);
+        db.collection('temp').doc('table').collection("menu").doc(res.menu_fb).set(res);
+      }
+    })
+  }
+
   render () {
 
     return (
@@ -198,7 +224,7 @@ class MenuEditPage extends React.Component {
           <Badge variant="secondary" className="total">Total {this.state.total}</Badge>
         </div>
         
-        <Button className="order" variant='success' >Order</Button>
+        <Button className="order" variant='success' k={this.changeQuantity()}>Order</Button>
         <Button variant='danger'>Result</Button>
         
       </div>

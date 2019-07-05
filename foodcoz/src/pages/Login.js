@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import './../cssFile/Login.css';
-import firebase, { db } from '../firebase';
-import loginM from "../components/loginM";
+import { db } from '../firebase';
+// import loginM from "../components/loginM";
 
 export default class Login extends Component {
 
@@ -85,9 +85,9 @@ export default class Login extends Component {
       let username = querySnapshot.docs[0].data().Username
       let password = querySnapshot.docs[0].data().Password
       console.log(querySnapshot.docs[0].data().SVC);
-      if (username == this.state.inputemail && password == this.state.inputpassword) {
+      if (username === this.state.inputemail && password === this.state.inputpassword) {
         // this.setState({ loginStatus: "/meditMenu" })
-        let setDoc = db.collection('Users').doc(username).collection('Restaurant').doc('test');
+        // let setDoc = db.collection('Users').doc(username).collection('Restaurant').doc('test');
         db.collection('Users').doc(username).collection('Restaurant').doc('test').delete();
 
 
@@ -118,7 +118,7 @@ export default class Login extends Component {
     console.log(this.state.password);
 
 
-    if (this.state.inputemail == "267" && this.state.inputpassword == "fuck" && this.state.loginStatus == "") {
+    if (this.state.inputemail === "267" && this.state.inputpassword === "fuck" && this.state.loginStatus === "") {
       this.setState({ loginStatus: "/meditMenu" })
     }
 

@@ -4,9 +4,9 @@ import Title from "../components/Title";
 import InputMenu from "../components/InputMenu";
 import MenuItems from "../components/MenuItems";
 import { db } from "../firebase";
-import firebase from "../firebase";
+// import firebase from "../firebase";
 import { Button } from 'react-bootstrap'
-import { async } from 'q';
+// import { async } from 'q';
 
 class App extends React.Component {
 
@@ -157,7 +157,7 @@ class App extends React.Component {
       let menu = { detail: this.state.menuInput, isDone: false }
       let price = { detail: this.state.priceInput, isDone: false }
 
-      let menu_fbn = this.state.menuInput;
+      // let menu_fbn = this.state.menuInput;
 
       let data = {
         menu_fb: this.state.menuInput,
@@ -238,7 +238,7 @@ class App extends React.Component {
   }
 
   handleSVC = () =>{
-    if(this.state.SVCinput == "" || typeof this.state.SVCinput !== "number"){this.setState({ SVCinput: this.state.SVC });}
+    if(this.state.SVCinput === "" || typeof this.state.SVCinput !== "number"){this.setState({ SVCinput: this.state.SVC });}
     let tempSVC = parseFloat(this.state.SVCinput);
     this.setState({ SVC: tempSVC });
   }

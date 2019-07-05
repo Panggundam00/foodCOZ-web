@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form } from 'react-bootstrap'
+// import { Button, Form } from 'react-bootstrap'
 
 export default class loginM extends Component {
     render() {
@@ -22,29 +22,3 @@ export default class loginM extends Component {
         )
     }
 }
-
-
-{/* <div className="App">
-          <div>
-            <h1>FoodCOZ</h1>
-          </div>
-          
-          <div height="200">
-            <lebal className="textLebal" >ID</lebal>
-          </div>
-          
-          <Form.Control type="email" className="inputPlace" />
-          
-          <div>
-            <lebal className="textLebal" >PASSWORD</lebal>
-          </div>
-          
-          <Form.Control type="password" className="inputPlace" data-init/>
-          
-           <div>
-           </div>
-             <div height="1000">
-          <Button className="loginButton" variant="success" href="/meditMenu">LOG IN</Button>
-          </div>
-           
-          </div> */}

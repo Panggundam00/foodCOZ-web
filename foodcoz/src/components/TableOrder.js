@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./../index.css";
 import { Table, Button } from 'react-bootstrap' ;
-import InputPage from './../components/Counter'
+// import InputPage from './../components/Counter'
 
 class TableOrder extends Component {
 
